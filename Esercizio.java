@@ -1,26 +1,38 @@
-//LEGGERE LE ISTRUZIONI NEL FILE README.md
-
-//Import di Classi Java necessarie al funzionamento del programma
 import java.util.Scanner;
 
-// Classe principale, con metodo main
 class Esercizio {
-    // Il programma parte con una chiamata a main().
-    public static void main(String args[])
-    {
-        //Variabili del programma
-        String nome;
+    public static void main(String args[]) {
+        Scanner in = new Scanner(System.in);
+        String parola;
 
-        //Creo l'oggetto in per l'input da tastiera
-        Scanner in = new Scanner( System.in );
+        while (true) {
+            System.out.print("Inserisci una parola (x per uscire): ");
+            parola = in.nextLine();
 
-        //Leggo l'input da tastiera
-        System.out.print("Inserisci il tuo nome: ");
-        nome = in.nextLine();
+            if (parola.equals("x")) {
+                System.out.println("Programma terminato.");
+                break;
+            }
 
-        //Output del nome acquisito da tastiera
-        System.out.println("Ciao "+nome+"!");
+            // Inserisco ogni carattere nella pila
+            Pila<Character> pila = new Pila<>();
+            for (char c : parola.toCharArray()) {
+                pila.push(c);
+            }
+
+            // Ricostruisco la parola al contrario estraendo dalla pila
+            StringBuilder rovesciata = new StringBuilder();
+            while (!pila.isEmpty()) {
+                rovesciata.append(pila.pop());
+            }
+
+            if (parola.equals(rovesciata.toString())) {
+                System.out.println("\"" + parola + "\" è palindroma!");
+            } else {
+                System.out.println("\"" + parola + "\" NON è palindroma.");
+            }
+        }
+
+        in.close();
     }
 }
-
-//LEGGERE LE ISTRUZIONI NEL FILE README.md
